@@ -25,7 +25,7 @@ export default function Header() {
   const navItems = [
     { name: "Beranda", href: "#" },
     { name: "Layanan", href: "#services" },
-    { name: "Harga", href: "#pricing" },
+    // { name: "Harga", href: "#pricing" },
     { name: "Testimoni", href: "#testimonials" },
     { name: "Kontak", href: "#contact" },
   ];
@@ -91,7 +91,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <Button
-              variant=""
+              variant="ghost"
               size="icon"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={isScrolled ? "text-gray-800" : "text-white"}

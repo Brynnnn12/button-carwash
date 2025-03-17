@@ -21,7 +21,7 @@ export default function Map() {
     <MapContainer
       center={center}
       zoom={15}
-      style={{ width: "100%", height: "300px" }}
+      style={{ width: "100%", height: "300px", zIndex: 0 }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker position={center} icon={markerIcon}>
