@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -11,29 +12,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { ClipLoader } from "react-spinners";
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "300px",
-};
-
-const center = {
-  lat: -6.9095208584825984,
-  lng: 109.53915273097336,
-};
+const MapComponent = dynamic(() => import("@/components/map"), { ssr: false });
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -146,21 +132,11 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle>Lokasi Kami</CardTitle>
                 <CardDescription>
-                  Temukan lokasi kami di peta di bawah ini.
+                  Temukan lokasi kami di peta berikut ini.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {isLoaded ? (
-                  <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    center={center}
-                    zoom={15}
-                  >
-                    <Marker position={center} />
-                  </GoogleMap>
-                ) : (
-                  <p className="text-center">Memuat peta...</p>
-                )}
+                <MapComponent />
               </CardContent>
             </Card>
           </motion.div>
